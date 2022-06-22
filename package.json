@@ -1,13 +1,13 @@
 {
   "name": "@kryptonxyz/shadow-drive",
   "version": "0.1.0",
-  "description": "Interfaces for GenesysGo ShadowDrive",
+  "description": "Modified Interfaces for GenesysGo ShadowDrive",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/GenesysGo/shadow-drive"
+    "url": "https://github.com/kryptonxyz/shadow-drive"
   },
   "publishConfig": {
     "access": "public"
