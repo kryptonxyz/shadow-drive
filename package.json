@@ -1,5 +1,5 @@
 {
-  "name": "@shadow-drive/sdk",
+  "name": "@kryptonxyz/shadow-drive",
   "version": "2.0.4",
   "description": "Interfaces for GenesysGo ShadowDrive",
   "main": "./dist/index.js",
