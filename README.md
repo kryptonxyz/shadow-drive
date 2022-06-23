@@ -7,7 +7,11 @@
 	</p>
 </div>
 
+<br />
+
 **Shadow Drive** API Client used by [shadow.storage](https://shadow.storage) 📦
+
+<br />
 
 **Note**: This is a modified fork adapted for our own needs.
 
