@@ -1,6 +1,6 @@
 {
   "name": "@kryptonxyz/shadow-drive",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Modified Interfaces for GenesysGo ShadowDrive",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
