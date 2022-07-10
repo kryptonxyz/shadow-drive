@@ -72,18 +72,13 @@ export default async function uploadFile(
     Buffer.isBuffer(fileBuffer) ? fileBuffer : Buffer.from(fileBuffer)
   );
   fileNameHashSum.update(data.name);
-  const fileHash = fileHashSum.digest("hex");
+  // const fileHash = fileHashSum.digest("hex");
   const fileNameHash = fileNameHashSum.digest("hex");
   try {
     const msg = new TextEncoder().encode(
       `Shadow Drive Signed Message:\nStorage Account: ${key}\nUpload files with hash: ${fileNameHash}`
     );
-    let msgSig: Uint8Array;
-    if (!this.wallet.signMessage) {
-      msgSig = nacl.sign.detached(msg, this.wallet.payer.secretKey);
-    } else {
-      msgSig = await this.wallet.signMessage(msg);
-    }
+    const msgSig: Uint8Array = await this.wallet.signMessage(msg);
     const encodedMsg = bs58.encode(msgSig);
     form.append("fileNames", data.name);
     form.append("message", encodedMsg);
@@ -100,7 +95,7 @@ export default async function uploadFile(
     });
     if (!uploadResponse.ok) {
       return Promise.reject(
-        new Error(`Server response status code: ${uploadResponse.status} \n 
+        new Error(`Server response status code: ${uploadResponse.status} \n
 				  Server response status message: ${(await uploadResponse.json()).error}`)
       );
     }
