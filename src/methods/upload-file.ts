@@ -78,7 +78,12 @@ export default async function uploadFile(
     const msg = new TextEncoder().encode(
       `Shadow Drive Signed Message:\nStorage Account: ${key}\nUpload files with hash: ${fileNameHash}`
     );
-    const msgSig: Uint8Array = await this.wallet.signMessage(msg);
+    let msgSig: Uint8Array;
+    if (!this.wallet.signMessage) {
+      msgSig = nacl.sign.detached(msg, this.wallet.payer.secretKey);
+    } else {
+      msgSig = await this.wallet.signMessage(msg);
+    }
     const encodedMsg = bs58.encode(msgSig);
     form.append("fileNames", data.name);
     form.append("message", encodedMsg);
