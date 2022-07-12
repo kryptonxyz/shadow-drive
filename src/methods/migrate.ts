@@ -20,6 +20,9 @@ export default async function migrate(
       this.program.programId
     );
 
+  let migrateStep1Error: Error;
+  let migrateStep2Error: Error;
+
   try {
     let tx = await this.program.methods
       .migrateStep1()
@@ -45,7 +48,7 @@ export default async function migrate(
       120000
     );
   } catch (err) {
-    return Promise.reject(new Error(err));
+    migrateStep1Error = err;
   }
   let res;
   try {
@@ -74,7 +77,12 @@ export default async function migrate(
       120000
     );
   } catch (err) {
-    return Promise.reject(new Error(err));
+    migrateStep2Error = err;
   }
+
+  if (migrateStep1Error || migrateStep2Error) {
+    return Promise.reject(new Error(migrateStep1Error?.message || migrateStep2Error?.message || 'Transaction Error'));
+  }
+
   return Promise.resolve(res);
 }
